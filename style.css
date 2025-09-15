@@ -1,0 +1,157 @@
+/* --- Saudi Founding Day Color Palette --- */
+:root {
+    --color-primary: #123C2C; /* A deep, earthy green */
+    --color-secondary: #E3D9C9; /* A light beige/sand color */
+    --color-accent: #6B4E45; /* A rich, earthy brown */
+    --color-text-dark: #333333; /* Dark gray for text */
+    --color-text-light: #F8F8F8; /* Off-white for light text */
+}
+
+/* --- General Body & Layout --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#map {
+    flex-grow: 1; /* This makes the map fill the available space */
+}
+
+/* --- Header & Footer Styling --- */
+header, footer {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 15px;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    font-style: italic;
+}
+
+footer {
+    font-size: 0.8em;
+    padding: 10px;
+}
+
+/* --- NEW: Popup Wrapper for Dynamic Stacking --- */
+#popup-wrapper {
+    display: flex;
+    flex-direction: column; /* Stacks children vertically */
+    gap: 15px; /* Adds space between the popups */
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+}
+
+/* --- Main Info Popup Styling --- */
+#popup-container {
+    display: none;
+    width: 300px;
+    max-height: calc(80vh - 100px);
+    padding: 20px;
+    background-color: var(--color-secondary);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+}
+
+#popup-container h2 {
+    margin-top: 0;
+    font-size: 1.4em;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 10px;
+}
+
+#popup-container p {
+    font-size: 1em;
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+/* --- City Popups Styling --- */
+#start-city-popup-container,
+#end-city-popup-container {
+    display: none;
+    width: 300px;
+    padding: 15px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#start-city-popup-container h3,
+#end-city-popup-container h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+#start-city-popup-container p,
+#end-city-popup-container p {
+    font-size: 0.9em;
+    color: var(--color-text-dark);
+}
+
+/* --- Other UI Elements --- */
+#discovery-popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    transform: none;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    font-weight: bold;
+    text-align: center;
+    animation: fadein 0.5s, fadeout 0.5s 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+#counter-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 1.1em;
+    font-weight: bold;
+}

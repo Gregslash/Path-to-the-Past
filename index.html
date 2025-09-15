@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طريق إلى الماضي</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha2048-QDrL6H7b4n6Q8l1vV5N4V3E5C8C6d8lV4N4Q4E5b9gN8C9j4D5l8C6d8j4d9e"
+        crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <header>
+        <h1>طريق إلى الماضي</h1>
+        <p>استكشف الطرق التاريخية للمملكة العربية السعودية</p>
+    </header>
+
+    <div id="discovery-popup">
+        <p>لقد اكتشفت مسارًا تاريخيًا!</p>
+    </div>
+    
+    <div id="map"></div>
+    
+    <div class="leaflet-control leaflet-draw leaflet-bar leaflet-control-container">
+        <a href="#" class="leaflet-draw-toolbar-button leaflet-toggle-popups" title="تبديل النوافذ المنبثقة">
+            <i class="fas fa-eye"></i>
+        </a>
+    </div>
+
+    <div id="popup-wrapper">
+        <div id="popup-container">
+            <h2 id="popup-title"></h2>
+            <p id="popup-story"></p>
+        </div>
+        
+        <div id="start-city-popup-container">
+            <h3 id="start-city-title"></h3>
+            <p id="start-city-story"></p>
+        </div>
+
+        <div id="end-city-popup-container">
+            <h3 id="end-city-title"></h3>
+            <p id="end-city-story"></p>
+        </div>
+    </div>
+
+    <div id="counter-container">
+        <span id="paths-discovered-count">0</span> / <span id="total-paths-count">25</span> مكتشفة
+    </div>
+
+    <footer>
+        <p>&copy; 2025 طريق إلى الماضي. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha2048-V7B6f8o4l5N3V2M8j2G1D8S7K4c2L6l4e2B8m7b1C5v6d4k3C2n9l8C7o1j9a8d7a6h4j"
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
