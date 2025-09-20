@@ -1,67 +1,68 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طريق إلى الماضي</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha2048-QDrL6H7b4n6Q8l1vV5N4V3E5C8C6d8lV4N4Q4E5b9gN8C9j4D5l8C6d8j4d9e"
-        crossorigin="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
+    <title>خريطة المواقع التاريخية في المملكة</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
-
-    <header>
-        <h1>طريق إلى الماضي</h1>
-        <p>استكشف الطرق التاريخية للمملكة العربية السعودية</p>
-    </header>
-
-    <div id="discovery-popup">
-        <p>لقد اكتشفت مسارًا تاريخيًا!</p>
-    </div>
-    
-    <div id="map"></div>
-    
-    <div class="leaflet-control leaflet-draw leaflet-bar leaflet-control-container">
-        <a href="#" class="leaflet-draw-toolbar-button leaflet-toggle-popups" title="تبديل النوافذ المنبثقة">
-            <i class="fas fa-eye"></i>
-        </a>
+<body class="dark-mode">
+    <div class="app-header">
+        <h1 class="header-title">مسارات المملكة</h1>
+        <p class="header-subtitle">خريطة تفاعلية للمواقع التاريخية والمعالم الأثرية في السعودية</p>
     </div>
 
-    <div id="popup-wrapper">
-        <div id="popup-container">
-            <h2 id="popup-title"></h2>
-            <p id="popup-story"></p>
-        </div>
+    <div class="app-container">
+        <div id="map" class="map-container"></div>
         
-        <div id="start-city-popup-container">
-            <h3 id="start-city-title"></h3>
-            <p id="start-city-story"></p>
-        </div>
+        <div id="legend" class="legend-container"></div>
 
-        <div id="end-city-popup-container">
-            <h3 id="end-city-title"></h3>
-            <p id="end-city-story"></p>
+        <div id="sidebar" class="sidebar">
+            <button id="toggle-sidebar-btn" class="sidebar-toggle-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div id="sidebar-content">
+                <div class="info-panel">
+                    <div class="sidebar-intro">
+                        <h3>كيفية استخدام الخريطة</h3>
+                        <p>
+                            هذه الخريطة التفاعلية تسمح لك باستكشاف المواقع التاريخية في المملكة العربية السعودية.
+                        </p>
+                        <ul style="padding-right: 20px; text-align: right;">
+                            <li><strong>الخريطة الرئيسية:</strong> انقر على أي أيقونة على الخريطة لعرض تفاصيل عنها في اللوحة الجانبية. يمكنك تكبير وتصغير الخريطة باستخدام أزرار (+) و (-).</li>
+                            <li><strong>اللوحة الجانبية:</strong> عند النقر على أيقونة، ستظهر هنا معلومات مفصلة. يمكنك توسيع اللوحة الجانبية بالنقر على زر السهم لتوفير مساحة أكبر للقراءة.</li>
+                            <li><strong>مفتاح الخريطة:</strong> يقع في الزاوية العلوية اليسرى من الخريطة. يمكنك استخدامه لإظهار أو إخفاء أنواع معينة من المواقع (مثل المدن، المواقع الأثرية، إلخ) عبر تشغيل وإيقاف المفتاح.</li>
+                        </ul>
+                    </div>
+                    <div id="info-panel" class="hidden">
+                        <h2 id="panel-title" class="panel-title"></h2>
+                        <div class="info-scroll-container">
+                            <p id="panel-story" class="panel-story"></p>
+                            <div class="city-info-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="city-info-list" id="city-info-list"></div>
+            </div>
+            
+            <div id="controls-container">
+                <div class="counter-display">
+                    المواقع المكتشفة: <span id="paths-discovered-count">0</span> / <span id="total-paths-count">0</span>
+                </div>
+                <button id="toggle-theme-btn" class="control-btn">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+            
         </div>
     </div>
 
-    <div id="counter-container">
-        <span id="paths-discovered-count">0</span> / <span id="total-paths-count">25</span> مكتشفة
-    </div>
+    <div id="discovery-notification" class="hidden"></div>
 
-    <footer>
-        <p>&copy; 2025 طريق إلى الماضي. جميع الحقوق محفوظة.</p>
-    </footer>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha2048-V7B6f8o4l5N3V2M8j2G1D8S7K4c2L6l4e2B8m7b1C5v6d4k3C2n9l8C7o1j9a8d7a6h4j"
-        crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
     <script src="script.js"></script>
-    
 </body>
 </html>
