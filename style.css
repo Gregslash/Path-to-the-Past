@@ -106,13 +106,36 @@ body.light-mode .counter-display {
 
 /* --- App Layout --- */
 .app-header {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 15px var(--color-shadow-subtle);
     z-index: 1000;
     position: relative;
     overflow: hidden;
     transition: background 0.5s ease, box-shadow 0.5s ease;
+    animation: glow-pulse-dark 3s infinite alternate;
+}
+body.light-mode .app-header {
+    animation: glow-pulse-light 3s infinite alternate;
+}
+
+
+.header-text-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: filter 0.5s ease;
+}
+
+body.dark-mode .header-image {
+    filter: drop-shadow(0 0 10px rgba(245, 198, 79, 0.6));
 }
 
 .header-title {
@@ -123,6 +146,10 @@ body.light-mode .counter-display {
     letter-spacing: 2px;
     text-shadow: 0 0 15px rgba(245, 198, 79, 0.4);
     transition: color 0.5s ease;
+    animation: text-glow-dark 3s infinite alternate;
+}
+body.light-mode .header-title {
+    animation: text-glow-light 3s infinite alternate;
 }
 
 .header-subtitle {
@@ -152,23 +179,28 @@ body.light-mode .counter-display {
 
 /* New CSS for truly collapsed sidebar */
 .sidebar {
-    width: 450px; /* Change this when changing the width */
+    width: 450px;
     box-shadow: -8px 0 20px var(--color-shadow-subtle);
     z-index: 2;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    transform: translateX(0); /* Default: sidebar is open */
+    transform: translateX(0);
     transition: transform 0.5s ease, background-color 0.5s ease, width 0.5s ease;
+    animation: glow-pulse-dark 3s infinite alternate;
 }
+body.light-mode .sidebar {
+    animation: glow-pulse-light 3s infinite alternate;
+}
+
 
 .sidebar-expanded {
     width: 650px;
 }
 
 .sidebar.collapsed {
-    transform: translateX(100%); /* Slides the entire sidebar off-screen */
+    transform: translateX(100%);
 }
 
 #sidebar-content {
@@ -183,7 +215,7 @@ body.light-mode .counter-display {
 
 .sidebar-toggle-btn {
     position: absolute;
-    right: 450px;  /* Change this when changing the width */
+    right: 450px;
     top: 50%;
     transform: translateY(-50%);
     background: var(--color-secondary-gold);
@@ -197,10 +229,16 @@ body.light-mode .counter-display {
     z-index: 1001;
     box-shadow: -4px 0 10px rgba(0,0,0,0.3);
     transition: all 0.5s ease;
+    animation: glow-pulse-dark 3s infinite alternate;
+}
+body.light-mode .sidebar-toggle-btn {
+    background: var(--light-color-primary-green);
+    color: var(--light-color-background-light);
+    animation: glow-pulse-light 3s infinite alternate;
 }
 
 .sidebar.collapsed + .sidebar-toggle-btn {
-    right: 0; /* Moves the button to the edge of the screen when collapsed */
+    right: 0;
     transform: translateY(-50%) rotate(180deg);
 }
 
@@ -209,6 +247,16 @@ body.light-mode .counter-display {
 }
 
 @media (max-width: 768px) {
+    .app-header {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-image {
+        margin: 0 0 1rem 0;
+    }
+
     .app-container {
         flex-direction: column-reverse;
     }
@@ -223,7 +271,7 @@ body.light-mode .counter-display {
     }
     .sidebar.collapsed {
         transform: translateY(100%);
-        height: 50%; /* Keeps it from disappearing completely on mobile */
+        height: 50%;
     }
     .sidebar.collapsed + .sidebar-toggle-btn {
         right: auto;
@@ -249,7 +297,7 @@ body.light-mode .counter-display {
 .info-scroll-container {
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 0.5rem; /* Space for the scrollbar */
+    padding-right: 0.5rem;
 }
 
 .sidebar-intro {
@@ -303,6 +351,31 @@ body.light-mode .counter-display {
     display: none !important;
 }
 
+/* --- Pulse Animations (light/glow effect) --- */
+@keyframes glow-pulse-dark {
+    0% { box-shadow: 0 0 5px var(--color-secondary-gold); }
+    50% { box-shadow: 0 0 15px var(--color-secondary-gold), 0 0 25px var(--color-secondary-gold); }
+    100% { box-shadow: 0 0 5px var(--color-secondary-gold); }
+}
+
+@keyframes glow-pulse-light {
+    0% { box-shadow: 0 0 5px var(--light-color-primary-green); }
+    50% { box-shadow: 0 0 15px var(--light-color-primary-green), 0 0 25px var(--light-color-primary-green); }
+    100% { box-shadow: 0 0 5px var(--light-color-primary-green); }
+}
+
+@keyframes text-glow-dark {
+    0% { text-shadow: 0 0 5px var(--color-secondary-gold); }
+    50% { text-shadow: 0 0 15px var(--color-secondary-gold), 0 0 25px var(--color-secondary-gold); }
+    100% { text-shadow: 0 0 5px var(--color-secondary-gold); }
+}
+
+@keyframes text-glow-light {
+    0% { text-shadow: 0 0 5px var(--light-color-primary-green); }
+    50% { text-shadow: 0 0 15px var(--light-color-primary-green), 0 0 25px var(--light-color-primary-green); }
+    100% { text-shadow: 0 0 5px var(--light-color-primary-green); }
+}
+
 /* --- Discovery Notification --- */
 #discovery-notification {
     position: absolute;
@@ -325,24 +398,24 @@ body.light-mode .counter-display {
 
 @keyframes fadein {
     from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    to  { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 @keyframes fadeout {
     from { opacity: 1; }
-    to   { opacity: 0; }
+    to  { opacity: 0; }
 }
 
 /* --- Control Buttons (NOW BOTTOM-LEFT) --- */
 #controls-container {
     position: absolute;
     bottom: 2rem;
-    left: 2rem; /* Changed from right to left */
+    left: 2rem;
     z-index: 1000;
     display: flex;
     align-items: center;
     gap: 1rem;
-    flex-direction: row-reverse; /* To keep the counter on the right of the button */
+    flex-direction: row-reverse;
 }
 
 .control-btn {
@@ -356,12 +429,23 @@ body.light-mode .counter-display {
     cursor: pointer;
     box-shadow: 0 4px 10px var(--color-shadow-subtle);
     transition: all 0.3s ease-in-out;
+    animation: glow-pulse-dark 3s infinite alternate;
+}
+body.light-mode .control-btn {
+    background-color: var(--light-color-background-light);
+    color: var(--light-color-primary-green);
+    border: 1px solid var(--light-color-primary-green);
+    animation: glow-pulse-light 3s infinite alternate;
 }
 
 .control-btn:hover {
     background: var(--gradient-button);
     color: var(--color-background-dark);
     transform: scale(1.1) rotate(10deg);
+}
+body.light-mode .control-btn:hover {
+    background: var(--light-gradient-header);
+    color: var(--light-color-dark-neutral);
 }
 
 .counter-display {
@@ -374,6 +458,12 @@ body.light-mode .counter-display {
     font-size: 1.1rem;
     letter-spacing: 1px;
     transition: background 0.5s ease, color 0.5s ease;
+    animation: glow-pulse-dark 3s infinite alternate;
+}
+body.light-mode .counter-display {
+    background: var(--light-gradient-panel);
+    color: var(--light-color-dark-neutral);
+    animation: glow-pulse-light 3s infinite alternate;
 }
 
 /* --- Leaflet Overrides --- */
@@ -416,10 +506,12 @@ body.light-mode .counter-display {
     box-shadow: 0 4px 15px var(--color-shadow-subtle);
     font-family: 'Tajawal', sans-serif;
     z-index: 1000;
+    animation: glow-pulse-dark 3s infinite alternate;
 }
 body.light-mode .legend-container {
     background-color: rgba(255, 255, 255, 0.85);
     color: var(--light-color-dark-neutral);
+    animation: glow-pulse-light 3s infinite alternate;
 }
 .legend-item {
     display: flex;
@@ -485,4 +577,36 @@ body.light-mode input:checked + .slider {
 }
 input:checked + .slider:before {
     transform: translateX(14px);
+}
+
+/* --- Scrolling Text Banner --- */
+.scrolling-text-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary-green);
+    color: var(--color-light-neutral);
+    padding: 0.5rem 0;
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+body.light-mode .scrolling-text-container {
+    background-color: var(--light-color-primary-green);
+    color: var(--light-color-background-light);
+}
+
+.scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-rtl 40s linear infinite;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+@keyframes scroll-rtl {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
 }
