@@ -30,23 +30,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
 
     const historicalSites = [
-        // Historical/Archaeological Sites
+        // Archaeological Sites (مواقع أثرية)
         { name_ar: "مدائن صالح", lat: 26.7865, lng: 37.9547, type: "archaeological" },
-        { name_ar: "واحة الأحساء", lat: 25.38, lng: 49.58, type: "archaeological" },
         { name_ar: "قرية الفاو", lat: 20.505, lng: 45.155, type: "archaeological" },
         { name_ar: "الأخدود", lat: 17.46, lng: 44.25, type: "archaeological" },
         { name_ar: "جبة", lat: 28.02, lng: 40.91, type: "archaeological" },
+        { name_ar: "تيماء", lat: 27.63, lng: 38.54, type: "archaeological" },
+        { name_ar: "واحة الأحساء", lat: 25.38, lng: 49.58, type: "archaeological" },
+
+        // Historical Sites (مواقع تاريخية)
         { name_ar: "خيبر", lat: 25.70, lng: 39.20, type: "historical_site" },
-        { name_ar: "الفريان (قصر)", lat: 26.47, lng: 49.99, type: "historical_site" },
-        { name_ar: "قصر المصمك", lat: 24.6366, lng: 46.7132, type: "fort" },
-        { name_ar: "العقير (ميناء)", lat: 25.6888, lng: 50.2197, type: "historical_site" },
-        { name_ar: "قصر إبراهيم", lat: 25.37, lng: 49.58, type: "fort" },
-        { name_ar: "قصر شمعون", lat: 29.85, lng: 39.88, type: "fort" },
         { name_ar: "جبل القارة", lat: 25.40, lng: 49.69, type: "historical_site" },
-        { name_ar: "جبل أبو مخروق", lat: 24.63, lng: 46.73, type: "historical_site" },
+        { name_ar: "قصر المصمك", lat: 24.6366, lng: 46.7132, type: "historical_site" },
         { name_ar: "محطة سكة حديد الهفوف", lat: 25.38, lng: 49.58, type: "historical_site" },
+        { name_ar: "قصر شبرة", lat: 20.6972, lng: 40.4357, type: "historical_site" },
+        { name_ar: "جبل أبو مخروق", lat: 24.63, lng: 46.73, type: "historical_site" },
+        { name_ar: "قلعة تبوك", lat: 28.39, lng: 36.57, type: "historical_site" },
+        { name_ar: "قصر إبراهيم", lat: 25.37, lng: 49.58, type: "historical_site" },
+        { name_ar: "قلعة دومة الجندل", lat: 29.805, lng: 39.888, type: "historical_site" },
+        { name_ar: "ميناء العقير", lat: 25.6888, lng: 50.2197, type: "historical_site" },
         
-        // Cities (More added for comprehensive coverage)
+        // Historical Cities (مدن تاريخية)
+        { name_ar: "الدرعية", lat: 24.7247, lng: 46.5779, type: "historical_city" },
+        { name_ar: "حي الطريف", lat: 24.7247, lng: 46.5779, type: "historical_city" },
+        { name_ar: "جدة التاريخية", lat: 21.4858, lng: 39.1925, type: "historical_city" },
+        
+        // Cities (مدن)
         { name_ar: "الرياض", lat: 24.7136, lng: 46.6753, type: "city" },
         { name_ar: "جدة", lat: 21.4858, lng: 39.1925, type: "city" },
         { name_ar: "مكة المكرمة", lat: 21.3891, lng: 39.8579, type: "city" },
@@ -62,22 +71,26 @@ document.addEventListener('DOMContentLoaded', () => {
         { name_ar: "أبها", lat: 18.22, lng: 42.50, type: "city" },
         { name_ar: "جازان", lat: 16.88, lng: 42.57, type: "city" },
         { name_ar: "نجران", lat: 17.58, lng: 44.22, type: "city" },
-        { name_ar: "دومة الجندل", lat: 29.805, lng: 39.888, type: "city" },
-        { name_ar: "تيماء", lat: 27.63, lng: 38.54, type: "city" },
         { name_ar: "العلا", lat: 26.6166, lng: 37.9167, type: "city" },
         { name_ar: "ينبع", lat: 24.0894, lng: 38.0641, type: "city" },
         { name_ar: "عرعر", lat: 30.9859, lng: 41.0366, type: "city" },
         { name_ar: "الهفوف", lat: 25.38, lng: 49.58, type: "city" },
         
-        // Routes & Regions
-        { name_ar: "الدرعية", lat: 24.7247, lng: 46.5779, type: "historical_city" },
-        { name_ar: "جدة التاريخية", lat: 21.4858, lng: 39.1925, type: "historical_city" },
+        // Routes & Regions (طرق ومناطق)
         { name_ar: "الخط الحديدي الحجازي", lat: 26.6166, lng: 37.9167, type: "route" },
-        { name_ar: "الهجرة النبوية", lat: 21.4225, lng: 39.8262, type: "route" },
+        { name_ar: "طريق الهجرة النبوية", lat: 21.4225, lng: 39.8262, type: "route" },
         { name_ar: "طريق البخور", lat: 21.4858, lng: 39.1925, type: "route" },
         { name_ar: "درب زبيدة", lat: 29.8, lng: 43.6, type: "route" },
         { name_ar: "منطقة عسير", lat: 18.2167, lng: 42.5000, type: "region" },
+        { name_ar: "منطقة الرياض", lat: 23.5, lng: 46.5, type: "region" },
+        { name_ar: "منطقة مكة المكرمة", lat: 21.5, lng: 40.5, type: "region" },
+        { name_ar: "المنطقة الشرقية", lat: 25.5, lng: 48.0, type: "region" },
+        { name_ar: "منطقة القصيم", lat: 26.0, lng: 43.5, type: "region" },
+        { name_ar: "منطقة المدينة المنورة", lat: 24.0, lng: 39.5, type: "region" },
         { name_ar: "طريق الملوك", lat: 21.4858, lng: 39.1925, type: "route" },
+        
+        // Islands (جزر)
+        { name_ar: "جزر فرسان", lat: 16.7111, lng: 42.0628, type: "island" },
         { name_ar: "تاروت", lat: 26.56, lng: 50.06, type: "island" }
     ];
     
@@ -197,8 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 emoji = '💎';
                 break;
             case 'city':
-            case 'historical_city':
                 emoji = '🏙️';
+                break;
+            case 'historical_city':
+                emoji = '🚧';
                 break;
             case 'fort':
                 emoji = '🏰';
