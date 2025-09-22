@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Add favicon link. Please replace the href with the correct file path. -->
     <link rel="icon" href="flag-of-saudi-arabia-free-png.webp" type="image/x-icon">
     <link rel="shortcut icon" href="" type="image/x-icon">
 </head>
@@ -27,6 +26,15 @@
         <div id="map" class="map-container"></div>
         
         <div id="legend" class="legend-container"></div>
+
+        <div id="controls-container">
+            <div class="counter-display">
+                المواقع المكتشفة: <span id="paths-discovered-count">0</span> / <span id="total-paths-count">0</span>
+            </div>
+            <button id="toggle-theme-btn" class="control-btn">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
 
         <div id="sidebar" class="sidebar">
             <button id="toggle-sidebar-btn" class="sidebar-toggle-btn">
@@ -55,16 +63,6 @@
                 </div>
                 <div class="city-info-list" id="city-info-list"></div>
             </div>
-            
-            <div id="controls-container">
-                <div class="counter-display">
-                    المواقع المكتشفة: <span id="paths-discovered-count">0</span> / <span id="total-paths-count">0</span>
-                </div>
-                <button id="toggle-theme-btn" class="control-btn">
-                    <i class="fas fa-sun"></i>
-                </button>
-            </div>
-            
         </div>
     </div>
 
