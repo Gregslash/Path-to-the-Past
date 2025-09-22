@@ -406,16 +406,17 @@ body.light-mode .sidebar-toggle-btn {
     to  { opacity: 0; }
 }
 
-/* --- Control Buttons (NOW BOTTOM-LEFT) --- */
+/* --- Control Buttons --- */
 #controls-container {
     position: absolute;
-    bottom: 2rem;
+    bottom: 4rem; /* Aligns controls above the footer */
     left: 2rem;
     z-index: 1000;
     display: flex;
     align-items: center;
     gap: 1rem;
-    flex-direction: row-reverse;
+    flex-direction: row; 
+    transition: all 0.5s ease-in-out;
 }
 
 .control-btn {
